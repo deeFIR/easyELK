@@ -4,7 +4,7 @@ echo "$(tput setaf 1) ---- Performing upgrade ----"
 sudo apt update -y
 sudo apt upgrade -y
 echo "$(tput setaf 1) ---- Setting Timezone to America/Chicago ----"
-sudo timedatectl set-timezone America/Chicago
+sudo timedatectl set-timezone Australia/Sydney
 date
 echo "$(tput setaf 1) ---- Installing Java 8 ----"
 sudo apt install openjdk-8-jdk
@@ -24,9 +24,7 @@ sudo apt-get install kibana
 echo "$(tput setaf 1) ---- Installing Logstash ----"
 sudo apt-get install logstash
 echo "$(tput setaf 1) ---- Installing Filebeat ----"
-curl -L -O https://artifacts.elastic.co/downloads/beats/filebeat/filebeat-7.4.0-amd64.deb
-sudo dpkg -i filebeat-7.4.0-amd64.deb
-sudo rm filebeat*
+sudo apt-get install filebeat
 sudo filebeat modules enable system
 sudo filebeat modules enable cisco
 sudo filebeat modules enable netflow
@@ -35,22 +33,15 @@ sudo filebeat modules enable elasticsearch
 sudo filebeat modules enable kibana
 sudo filebeat modules enable logstash
 echo "$(tput setaf 1) ---- Installing Metricbeat ----"
-curl -L -O https://artifacts.elastic.co/downloads/beats/metricbeat/metricbeat-7.4.0-amd64.deb
-sudo dpkg -i metricbeat-7.4.0-amd64.deb
-sudo rm metricbeat*
+sudo apt-get install metricbeat
 sudo metricbeat modules enable elasticsearch
 sudo metricbeat modules enable kibana
 sudo metricbeat modules enable logstash
 sudo metricbeat modules enable system
 echo "$(tput setaf 1) ---- Installing Packetbeat ----"
-sudo apt-get install libpcap0.8
-curl -L -O https://artifacts.elastic.co/downloads/beats/packetbeat/packetbeat-7.4.0-amd64.deb
-sudo dpkg -i packetbeat-7.4.0-amd64.deb
-sudo rm packetbeat*
+sudo apt-get install packetbeat
 echo "$(tput setaf 1) ---- Installing Auditbeat ----"
-curl -L -O https://artifacts.elastic.co/downloads/beats/auditbeat/auditbeat-7.4.0-amd64.deb
-sudo dpkg -i auditbeat-7.4.0-amd64.deb
-sudo rm auditbeat*
+sudo apt-get install auditbeat
 echo "$(tput setaf 1) ---- Starting Elasticsearch ----"
 sudo /bin/systemctl daemon-reload
 sudo /bin/systemctl enable elasticsearch.service
@@ -93,5 +84,3 @@ echo "$(tput setaf 1) ---- Now It's Your Turn: Finsh Configuration ----"
 echo "$(tput setaf 3) 1. edit kibana.yml and change server.host to 0.0.0.0 so that you can connect to kibana from other systems http://IPADDRESS:5601"
 echo "$(tput setaf 3) 2. edit elasticsearch.yml and change network.host to 0.0.0.0 so that other systems can send data to elasticsearch"
 echo "$(tput setaf 3) 3. restart both services sudo systemctl restart elasticsearch kibana"
-
-
