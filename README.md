@@ -13,22 +13,25 @@ Great for users who want to install quickly or for those who are new to ELK and 
 
 ## How To Use
 
-1. Copy, then navigate to easyELK in the system where you want to run the ELK stack 
 
+
+
+
+1. Copy script using wget and write it to the current directory
 ```
-git clone https://github.com/josh-thurston/easyELK.git && cd easyELK
+wget https://raw.githubusercontent.com/deeFIR/easyELK/master/easyELK7.4 -O elk7.4.sh
 ```
 
 2. Make easyELK executable 
 
 ```
-sudo chmod +x easyELK
+sudo chmod +x elk7.4.sh
 ```
 
 3. Run easyELK
 
 ```
-sudo ./easyELK
+sudo ./elk7.4.sh
 ```
 
 easyELK will perform the following steps:
